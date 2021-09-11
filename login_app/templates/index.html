@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    {% load static %}
+
+
+</head>
+
+<body>
+    <div class="container-fluid" style="background-color: rgb(227, 243, 228);">
+        <div class="p-5 bg-success" >
+            <div class="row justify-content-center alin-items-center">
+                <div class="col text-center">
+                    <h1 style="color: rgb(247, 240, 222);">JW Event Planner</h1>
+                </div>
+                <div class="col mt-3">
+                    <h3 style="color: rgb(247, 240, 222);">Create Happy Memories...</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <img class="img-fluid thumbnail" style="width: 500px;"
+                    src="https://m.media-amazon.com/images/I/61YJtUTnd3L._AC_SL1001_.jpg" alt="Outdoor Picnic Scene">
+            </div>
+            <div class="col-md-6">
+                <h4>Plan and connect...</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="m-3 text-center">Registration</h2>
+                {% if request.session.send == "register" %}
+                {% for message in messages %}
+                <p style="color: red;">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                <form action="/register" method="POST">
+                    {% csrf_token %}
+                    <label class="mr-4" for="">First Name</label>
+                    <input type="text" name="first_name" value="{{request.session.first_name}}"><br>
+                    <label class="mr-4" for="">Last Name</label>
+                    <input type="text" name="last_name" value="{{request.session.last_name}}"><br>
+                    <label class="mr-3" for="">Email</label>
+                    <input class="ml-5" type="text" name="email" value="{{request.session.email}}"><br>
+                    <label class="mr-4" for="">Password</label>
+                    <input class="ml-2" type="password" name="password"><br>
+                    <label class="mr-3" for="">Confirm PW</label>
+                    <input type="password" name="confirm_pw"><br>
+                    <input type="submit" class="btn btn-secondary mt-4" value="Register">
+                </form>
+            </div>
+            <div class="col text-center">
+                <h2 class="m-3 text-center">Login</h2>
+                {% if request.session.send == "login" %}
+                {% for message in messages %}
+                <p style="color: red;">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+                    <label class="mr-5" for="">Email</label>
+                    <input type="text" name="email"><br>
+                    <label class="mr-3" for="">Password</label>
+                    <input type="password" name="password"><br>
+                    <input type="submit" class="btn btn-secondary mt-4" value="Log In">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
