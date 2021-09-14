@@ -19,6 +19,9 @@ def register(request):
         print(pw_hash)
         user= User.objects.create(first_name= request.POST['first_name'], last_name=request.POST['last_name'], email= request.POST['email'], password= pw_hash)
         request.session['user_id'] = user.id
+        request.session['first_name']= user.first_name
+        request.session['last_name']= user.last_name
+        request.session['email']= user.email
         request.session['send'] = "registered"
         return redirect('/events')
 
@@ -36,10 +39,12 @@ def login(request):
                 return redirect('/')
             if logged_user:
                 user= logged_user[0]
-                request.session['first_name'] = user.first_name
+                # request.session['first_name'] = user.first_name
                 if bcrypt.checkpw(request.POST['password'].encode(), user.password.encode()):
                     request.session['user_id']= user.id
-                    request.session['user_email']= user.id
+                    request.session['first_name']= user.first_name
+                    request.session['last_name']= user.last_name
+                    request.session['email']= user.email
                     print(request.POST)
                     request.session['send'] = "logged in"
                     return redirect('/events')

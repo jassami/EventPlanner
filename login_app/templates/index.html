@@ -18,7 +18,7 @@
 
 <body>
     <div class="container-fluid" style="background-color: rgb(227, 243, 228);">
-        <div class="p-5 bg-success" >
+        <header class="p-3" style="background-color: rgb(47, 80, 64);" >
             <div class="row justify-content-center alin-items-center">
                 <div class="col text-center">
                     <h1 style="color: rgb(247, 240, 222);">JW Event Planner</h1>
@@ -27,61 +27,115 @@
                     <h3 style="color: rgb(247, 240, 222);">Create Happy Memories...</h3>
                 </div>
             </div>
-        </div>
+        </header>
 
-        <div class="row">
+        <section>
+        <div class="row justify-content-center align-items-center my-5">
             <div class="col-6">
-                <img class="img-fluid thumbnail" style="width: 500px;"
+                <img class="img-fluid thumbnail" style="width: 600px; height: 350px; border: 4px solid #fefefe"
                     src="https://m.media-amazon.com/images/I/61YJtUTnd3L._AC_SL1001_.jpg" alt="Outdoor Picnic Scene">
             </div>
-            <div class="col-md-6">
+            <div class="col-6 p-3" style="width: 600px; border: 2px solid rgb(100, 145, 123);">
                 <h4>Plan and connect...</h4>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                     industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
                     and scrambled it to make a type specimen book.</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col text-center">
-                <h2 class="m-3 text-center">Registration</h2>
+        </section>
+            <div class="row justify-content-center">
+            <div class="col">
+                <h3 class="mb-4 text-center">Registration</h3>
                 {% if request.session.send == "register" %}
                 {% for message in messages %}
-                <p style="color: red;">{{message}}</p>
+                <p class="text-center" style="color: red;">{{message}}</p>
                 {% endfor %}
                 {% endif %}
-                <form action="/register" method="POST">
+                <form action="/register" method="POST" class="mb-5">
                     {% csrf_token %}
-                    <label class="mr-4" for="">First Name</label>
-                    <input type="text" name="first_name" value="{{request.session.first_name}}"><br>
-                    <label class="mr-4" for="">Last Name</label>
-                    <input type="text" name="last_name" value="{{request.session.last_name}}"><br>
-                    <label class="mr-3" for="">Email</label>
-                    <input class="ml-5" type="text" name="email" value="{{request.session.email}}"><br>
-                    <label class="mr-4" for="">Password</label>
-                    <input class="ml-2" type="password" name="password"><br>
-                    <label class="mr-3" for="">Confirm PW</label>
-                    <input type="password" name="confirm_pw"><br>
-                    <input type="submit" class="btn btn-secondary mt-4" value="Register">
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-2">
+                            <label>First name</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" name="first_name">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-2">
+                            <label>Last name</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" name="last_name">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-2">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="email" class="form-control" name="email" placeholder="example@gmail.com">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-2">
+                            <label>Password</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-2">
+                            <label>Confirm PW</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="password" class="form-control" name="confirm_pw">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                    <input type="submit" class="btn btn-secondary mt-2" value="Register">
+                    </div>
                 </form>
             </div>
-            <div class="col text-center">
-                <h2 class="m-3 text-center">Login</h2>
+            <div class="col">
+                <h3 class="mb-4 text-center">Login</h3>
                 {% if request.session.send == "login" %}
                 {% for message in messages %}
-                <p style="color: red;">{{message}}</p>
+                <p class="text-center" style="color: red;">{{message}}</p>
                 {% endfor %}
                 {% endif %}
-                <form action="/login" method="POST">
+                <form action="/login" method="POST" class="mb-5">
                     {% csrf_token %}
-                    <label class="mr-5" for="">Email</label>
-                    <input type="text" name="email"><br>
-                    <label class="mr-3" for="">Password</label>
-                    <input type="password" name="password"><br>
-                    <input type="submit" class="btn btn-secondary mt-4" value="Log In">
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-2">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="email" class="form-control" name="email" placeholder="example@gmail.com">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-2">
+                        <div class="col-2">
+                            <label>Password</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                    <input type="submit" class="btn btn-secondary mt-2" value="Log In">
+                    </div>
                 </form>
             </div>
         </div>
+        <footer>
+        <div class="row pt-3" style="background-color: rgb(47, 80, 64);">
+            <p class="text-center" style="font-size: x-small; color: rgb(247, 240, 222);">© 2021 JW Event Planner, Inc</p>
+        </div>
+        </footer>
     </div>
+    
 </body>
 
 </html>
