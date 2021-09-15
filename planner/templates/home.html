@@ -13,16 +13,63 @@
 </head>
 <body>
     <div class="container-fluid" style="background-color: rgb(227, 243, 228);">
-        <header class="p-3" style="background-color: rgb(47, 80, 64);" >
+        <header class="p-5" style="background-color: rgb(47, 80, 64);" >
             <div class="row justify-content-center alin-items-center">
                 <div class="col-4 pt-2">
-                    <h3 style="color: rgb(247, 240, 222);">Welcome to JW Event Planner {{request.session.first_name}}!</h3>
+                    <h3 class="text-center" style="color: rgb(247, 240, 222);">Welcome {{request.session.first_name}}!</h3>
                 </div>
-                <div class="col mt-3">
-                    <h3 style="color: rgb(247, 240, 222);">Create Happy Memories...</h3>
+                <div class="col-4 pt-2">
+                    <h3 class="text-center" style="color: rgb(247, 240, 222);"></h3>
+                </div>
+                <div class="col-4 mt-3">
+                    <h5 class="text-center"><a style="color: rgb(247, 240, 222);" href="/">Logout</a></h5>
                 </div>
             </div>
         </header>
+        <section>
+            <div class="row">
+                <div class="col-5 ml-5">
+                    <h1 class="m-5">Add an event</h1>
+                    <form class="m-5" action="/events/add_event" method="POST">
+                        {% csrf_token %}
+                        <div class="col-4 m-2 pb-3">
+                            <label for="">Event Title</label>
+                            <input type="text" name="title" class="form-control">
+                        </div>
+                        <div class="col-8 m-2 pb-3">
+                            <label for="">Event Description</label>
+                            <textarea class="form-control" name="description" id="" cols="30" rows="3"></textarea>
+                        </div>
+                        <div class="col-4 m-2 pb-3">
+                            <label for="">Event Location</label>
+                            <input class="form-control" name="location"></input>
+                        </div>
+                        <div class="col-4 m-2 pb-3">
+                            <label for="">Event Date & Time</label>
+                            <input type="datetime-local" class="form-control" name="date_time" id="">
+                        </div>
+                        <input type="submit" value="Add Event" class="btn btn-secondary m-2 mb-5">
+                    </form>
+                </div>
+                <div class="col-6 m-5">
+                    <h1>Schedualed Events</h1>
+                    <div>
+                        {% for event in events %}
+                        <h4><a href="/events/event/{{event.id}}">{{event.title}}</a></h4>
+                        <p>Created By: {{event.creator.first_name}} {{event.creator.last_name}}</p>
+                        <p>Description: {{event.description}}</p>
+                        <p>Location: {{event.location}}</p>
+                        <p>Date & Time{{event.date_time}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="row pt-3" style="background-color: rgb(47, 80, 64);">
+                <p class="text-center" style="font-size: x-small; color: rgb(247, 240, 222);">© 2021 JW Event Planner, Inc</p>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
