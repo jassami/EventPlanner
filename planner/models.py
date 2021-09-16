@@ -12,7 +12,7 @@ class Event(models.Model):
 
 class Comment(models.Model):
     post= models.TextField()
-    poster= models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-    event_comment= models.ForeignKey(Event, related_name="event_comments", on_delete=models.CASCADE)
+    user= models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
+    event= models.ForeignKey(Event, related_name="event_comments", on_delete=models.CASCADE)
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
